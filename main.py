@@ -81,8 +81,8 @@ def match_positions(input_vcf1, input_vcf2, outfile, write_out):
     print(str(len(pos_mem_2)))
 
     reader_template = vcf.Reader(filename=input_vcf1)
-    matching_file = '/home/go/Documents/TimothyOkitsu/scratch/merged_files_strelka/matching/' + outfile
-    unmatching_file = '/home/go/Documents/TimothyOkitsu/scratch/merged_files_strelka/unmatching/' + outfile
+    matching_file = 'matching/' + outfile
+    unmatching_file = 'unmatching/' + outfile
     if write_out:
         vcf_writer = vcf.Writer(open(matching_file, 'w'), reader_template)
         vcf_writer2 = vcf.Writer(open(unmatching_file, 'w'), reader_template)
@@ -166,6 +166,7 @@ if __name__ == '__main__':
     #parser.add_argument("-j", "--input_file_graph", help="Temporary Input File for graphing")
     parser.add_argument("-o", "--output_file", help="Intermediary output file") #Set this flag only if you need to do the same type haplo filter again
     parser.add_argument("-m", "--matching_file", help="File to compare to")
+    parser.add_argument("-c", "--merge_csv", action="store_true", help="Run with csvs instead of vcf")
 
     args = parser.parse_args()
     input_file = args.input_file
