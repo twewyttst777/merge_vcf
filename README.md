@@ -1,3 +1,9 @@
-main.py can be run with command line arguments to combine two vcf files. merge_vcf.sh is a script for batch runs; pass a directory as input and it will run every file in it.
+main.py can be run with command line arguments to combine two vcf files.
 
-Will likely require modification to run as desired.
+> python3 main.py -i FILE_1 -m FILE_2 -o OUTFILE
+
+Will scan the contents of FILE_1 and output the entries in FILE_2 that share the same chromosomes and starting position.
+
+merge_vcf.sh is a script for batch runs; pass a directory as input and it will run every file in it.
+
+Will require modification to run as desired.
