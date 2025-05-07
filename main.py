@@ -10,60 +10,6 @@ import os.path
 import csv
 import re, sys
 
-af_filter_level = .1
-
-#TODO: Can I make this more pythony?
-
-def double_genotype(f_record):
-    #TODO: Check this one liner
-    #Probably not worth it, this is pretty fast anyways.
-    #return Counter(for sample in f_record.samples).values().count(2) == 0
-    gt = []
-    for sample in f_record.samples:
-        if sample['GT'] in gt:
-            return 0
-        if sample['GT'] == './.':
-            return 0
-        gt.append(sample['GT'])
-    return 1
-
-def af_filter(f_record):
-    for sample in f_record.samples:
-        if sample['DP'] and sample['AD'][1]/sample['DP'] < af_filter_level:
-            return 0
-    return 1
-
-def double_filter(f_record):
-    return double_genotype(f_record) and af_filter(f_record)
-
-def filter_str_builder(gq, dp):
-    #TODO: Make this more expandable
-    filter_str = "MIN(FMT/GQ) >= {0} && MIN(FMT/DP) > {1}".format(gq, dp)
-    print(filter_str)
-    return filter_str
-
-def custom_filters(ifile, ofile):
-    #We use pyvcf to get an iterable for the file
-    #    and then use itertools filter to filter them
-    #Albeit, perhaps this should've just been using the pyvcf filter tool anyways.
-    #TODO: Test performance of this
-    #       Addendum: Performance is very good, it's just the io that sucks
-    #       But I'm bad at IO unfortunately
-    vcf_reader = vcf.Reader(filename=ifile)
-    #Is an iterator
-    filtered_vcf = filter(double_filter, vcf_reader)
-    reader_template = vcf.Reader(filename='out.vcf')
-    vcf_writer = vcf.Writer(open(ofile, 'w'), reader_template)
-    i = 0
-    for record in filtered_vcf:
-        #This is the bottleneck
-        vcf_writer.write_record(record)
-        if i == 500:
-            vcf_writer.flush()
-            i=0
-        i += 1
-    vcf_writer.close()
-
 def match_positions(input_vcf1, input_vcf2, outfile, write_out):
 
     vcf_reader_1=vcf.Reader(filename=input_vcf1)
