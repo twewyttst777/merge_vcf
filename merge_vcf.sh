@@ -6,7 +6,6 @@ mkdir -p unmatching
 
 for i in {01..30}
 do
-	(( 16<i && i<26)) && continue
 	for FILE in /media/go/wgsAnalysis/KgpOut_Echo/KUNUSCCLH_00${i}/analysis/*.HC_All.vcf;
 	do
 		PREFIX=${FILE%%.*}
