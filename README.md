@@ -16,4 +16,4 @@ NOTE: The bash script is set up to run twice; for a file filtered for indels and
 
 > pip3 install -r requirements.txt
 
-Will install required files.
+Will install required files. You should run this in a [virtual environment](https://docs.python.org/3/library/venv.html).
