@@ -9,4 +9,4 @@ python-dateutil==2.9.0.post0
 pytz==2025.2
 six==1.17.0
 pyVCF @ git+https://github.com/jamescasbon/PyVCF.git
-
+setuptools==39.0.1
