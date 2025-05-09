@@ -10,6 +10,8 @@ This will scan the contents of FILE_1 and output the entries in FILE_2 that shar
 
 merge_vcf.sh is a script for batch runs; pass a directory as input and it will run every file in it. Will require modification to run as desired.
 
+NOTE: The bash script is set up to run twice; for a file filtered for indels and one filtered for SNVs. If your files are structured similarly, you may need to combine them using bcftools.
+
 ## Installation
 
 > pip3 install -r requirements.txt
