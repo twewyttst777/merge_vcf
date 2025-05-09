@@ -4,7 +4,7 @@
 mkdir -p matching
 mkdir -p unmatching
 
-for FILE in [your_path]/*.HC_All.vcf;
+for FILE in [your_path]/*.vcf;
 do
 	PREFIX=${FILE%%.*}
 	NOPATH="${PREFIX##*/}"
