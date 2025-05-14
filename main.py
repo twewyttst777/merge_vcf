@@ -96,7 +96,7 @@ def merge_csvs(input_file1, input_file2, output_file):
     df1['Start_Position'] = df1.Start_Position.astype(str, errors='raise')
     df2['Start_Position'] = df2.Start_Position.astype(str, errors='raise')
 
-    merged_df = pd.merge(df1, df2, how='inner', on=on_list, suffixes = ["_Dragen","_MuTect"])
+    merged_df = pd.merge(df1, df2, how='inner', on=on_list, suffixes = [input_file1,input_file2])
     merged_df.drop_duplicates(subset=on_list, keep='first')
 
     combined_len = len(merged_df) 
